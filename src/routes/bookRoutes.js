@@ -1,7 +1,8 @@
 const express = require("express");
 const bodyParser =require("body-parser");
 const booksRouter = express.Router();
-booksRouter.use(bodyParser.urlencoded({ extended: true })); 
+var obj=[];
+var encodedParser=bodyParser.urlencoded({ extended: true }); 
 var books=[{
     title:'Tom and Jerry',
     author:'Joseph Barbera',
@@ -28,7 +29,8 @@ function router(nav){
         {
             nav,
             title:'Library',
-            books
+            books,
+            obj
          });
     });
     booksRouter.get('/:id',function(req,res){
@@ -36,15 +38,24 @@ function router(nav){
         res.render("book",{
             nav,
             title:'Library',
-            book:books[id]
+            book:books[id],
+            
         })
     })
-    booksRouter.post('/', function(req, res) {
+    booksRouter.post('/',encodedParser, function(req, res) {
+        data={
+            name:req.body.bookname,
+            author:req.body.bookauthor,
+            genre:req.body.bookgenre,
+            img:'unavailable.jpg'
+        }
+        obj.push(data);
         res.render("books",
         {
             nav,
            title:'Library',
-           books
+           books,
+           obj
         });
       });
     return booksRouter;
