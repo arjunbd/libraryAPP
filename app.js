@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser =require("body-parser");
 let alert = require('alert');
 const app = express();
+const port = process.env.PORT||8080
 const nav = [{link:'/books',name:'Books'},{link:"/authors",name:'Authors'},{link:"/add",name:"Add Items"},{link:"/login",name:"Login"},{link:"/signup",name:"Signup"}] ;
 const booksRouter = require("./src/routes/bookRoutes")(nav)
 const authorRouter = require("./src/routes/authorRoutes")(nav)
@@ -37,4 +38,4 @@ app.get('/',function(req,res){
        title:'Library'
     });
 });
-app.listen(8080, () => console.log(`Started server at http://localhost:8080!`));
+app.listen(port, () => console.log(`Started server`));
