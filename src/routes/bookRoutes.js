@@ -1,5 +1,7 @@
 const express = require("express");
+const bodyParser =require("body-parser");
 const booksRouter = express.Router();
+booksRouter.use(bodyParser.urlencoded({ extended: true })); 
 var books=[{
     title:'Tom and Jerry',
     author:'Joseph Barbera',
@@ -37,7 +39,14 @@ function router(nav){
             book:books[id]
         })
     })
-
+    booksRouter.post('/', function(req, res) {
+        res.render("books",
+        {
+            nav,
+           title:'Library',
+           books
+        });
+      });
     return booksRouter;
 }
 

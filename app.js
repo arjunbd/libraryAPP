@@ -17,7 +17,6 @@ app.use('/login',loginRouter);
 app.use('/signup',signupRouter);
 app.use('/add',addRouter);
 app.post('/', function(req, res) {
-    console.log('You sent the name "' + req.body.name + '".');
     res.render("index",
     {
         nav,
